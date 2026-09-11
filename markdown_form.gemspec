@@ -1,11 +1,41 @@
-Gem::Specification.new do |s|
-  s.name        = "markdown_form"
-  s.version     = "0.0.1"
-  s.summary     = "Simple form elements in Markdown"
-  s.description = "Jekyll plugin to create form elements (mostly input) in simple Markdown syntax"
-  s.authors     = ["Chris Angelico"]
-  s.email       = "rosuav@gmail.com"
-  s.files       = ["lib/markdown_form.rb"]
-  s.homepage    = "https://github.com/Rosuav/markdown-form"
-  s.license     = "MIT"
+# frozen_string_literal: true
+
+require_relative "lib/markdown_form/version"
+
+Gem::Specification.new do |spec|
+  spec.name = "markdown_form"
+  spec.version = MarkdownForm::VERSION
+  spec.authors = ["Chris Angelico"]
+  spec.email = ["rosuav@gmail.com"]
+
+  spec.summary = "Simple form elements in Markdown"
+  spec.description = "Jekyll plugin to create form elements (mostly input) in simple Markdown syntax"
+  spec.homepage = "https://github.com/Rosuav/markdown-form"
+  spec.license = "MIT"
+  spec.required_ruby_version = ">= 3.0.0"
+
+  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "https://github.com/Rosuav/markdown-form"
+  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  gemspec = File.basename(__FILE__)
+  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
+    ls.readlines("\x0", chomp: true).reject do |f|
+      (f == gemspec) ||
+        f.start_with?(*%w[bin/ test/ spec/ features/ .git appveyor Gemfile])
+    end
+  end
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  # Uncomment to register a new dependency of your gem
+  # spec.add_dependency "example-gem", "~> 1.0"
+
+  # For more information and examples about making a new gem, check out our
+  # guide at: https://bundler.io/guides/creating_gem.html
 end
