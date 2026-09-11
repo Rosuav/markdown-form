@@ -23,6 +23,12 @@ gem install markdown_form
 
 TODO: Write usage instructions here once I figure out exactly how the syntax is going to be designed.
 
+* Option 1: Form is implicit (or provided by the HTML layout), and {% form Name %} to plop in a field
+* Option 2: Form is a block eg {% form %} ...... {% endform %} and inside are {% field Name %}
+* Option 3: Fields are eg `[[Name]]` which might conflict with link syntax
+
+Frontmatter can carry extra info eg form destination/action
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rosuav/markdown_form.
