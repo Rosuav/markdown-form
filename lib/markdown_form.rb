@@ -2,7 +2,19 @@
 
 require_relative "markdown_form/version"
 
-module MarkdownForm
-  class Error < StandardError; end
-  # Your code goes here...
+module Jekyll
+  class MarkdownFormTag < Liquid::Tag
+
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text
+      puts "Hello, world!"
+    end
+
+    def render(context)
+      "<input> #{@text}"
+    end
+  end
 end
+
+Liquid::Template.register_tag('form', Jekyll::MarkdownFormTag)
