@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-## [0.1.0] - 2026-09-11
+## [0.2.1] - 2026-09-11
 
 - Actually functional! No backward compatibility guarantees yet.
 
