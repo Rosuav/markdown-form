@@ -21,17 +21,26 @@ gem install markdown_form
 
 ## Usage
 
-TODO: Write usage instructions here once I figure out exactly how the syntax is going to be designed.
+Include a form destination in your frontmatter eg `form: some-action` and have your layout HTML, CSS, and JS
+handle this appropriately. The form element itself will not be created in Markdown.
 
-* Option 1: Form is implicit (or provided by the HTML layout), and {% form Name %} to plop in a field
-* Option 2: Form is a block eg {% form %} ...... {% endform %} and inside are {% field Name %}
-* Option 3: Fields are eg `[[Name]]` which might conflict with link syntax
+Create form fields using `[[Field with some descriptive text]]` syntax; they will be contained within labels,
+and styling `label > span { ... }` will affect the label without the input.
 
-Frontmatter can carry extra info eg form destination/action
+By default, the first word of the descriptive text will become the field's name. To override this, emphasize
+some other word, eg `[[Enter your *widget* name]]` to name the field "widget". If the desired name does not
+occur in the label, provide it as an annotation: `[[Name of your pet (petname)]]`
+
+To create a check box instead of a text input, annotate the label with `(?)`. This can be combined with a
+field name annotation: `[[I agree to not be an idiot (notidiot?)]]`
+
+A submit button can be created by naming a field "submit": `[[Apply now! (submit)]]`
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rosuav/markdown_form.
+
+Build and publish a gem with `rake build` and `rake release`.
 
 ## License
 
