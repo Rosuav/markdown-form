@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-14
+
+- Rework syntax to [[FieldName]] and support nicer notation for customization
+
 ## [0.2.1] - 2026-09-11
 
 - Actually functional! No backward compatibility guarantees yet.

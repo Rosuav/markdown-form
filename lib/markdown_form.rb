@@ -8,23 +8,39 @@ module Jekyll
     def initialize(tag_name, text, tokens)
       super
       text.strip!
-      if m = text.match(/^([A-Za-z0-9]+)(\??): (.*)$/)
-        @name = m[1]
-        @type = m[2] == "?" ? "checkbox" : "text"
-        @label = m[3]
-      else
-        @name = text.downcase
-        @type = "text"
-        @label = text
+      return if text == ""
+      # Valid syntaxes:
+      # {% field Thing %} -> input with name "thing" labelled "Thing"
+      # {% field Your *name* %} -> input with name "name" labelled "Your name" - note that regular emphasis is thus disabled in labels
+      # {% field Who are you? (name) %} -> input with name "name" labelled "Who are you?"
+      # {% field I *agree* to the terms (?) %} -> check box with name "agree" labelled "I agree to the terms"
+      # All above syntaxes can also be written as eg [[Thing]]
+      # If the name is "submit", it will become a submit button.
+      @name = ""
+      @type = "text"
+      @label = text.sub(/ *\(([A-Za-z0-9]*)(\??)\)$/) {|m|
+        puts "Captured!", m, $1, $2
+        @name = $1
+        @type = "checkbox" if $2 == "?"
+        "" # Remove the parenthesized annotation
+      }
+      if @name == ""
+        @label.sub!(/\*([A-Za-z0-9]+)\*/) {|m|
+          puts "Emphasis name", m, $1
+          @name = $1.downcase
+          $1 # Remove the emphasis markers but keep the word (not downcased)
+        }
       end
+      # If a name hasn't been provided by annotation or emphasis, use the first word of the label.
+      @name = /[^ ]+/.match(@label)[0].downcase if @name == ""
       if @name == "submit" then @type = "submit" end
     end
 
     def render(context)
       case @type
-      when "checkbox" then "<label><input type=checkbox name=#{@name}> #{@label}"
+      when "checkbox" then "<label><input type=checkbox name=#{@name}> <span>#{@label}</span>"
       when "submit" then "<button type=submit>#{@label}</button>"
-      else "<label>#{@label}: <input name=#{@name}></label>"
+      else "<label><span>#{@label}</span> <input name=#{@name}></label>"
       end
     end
   end
