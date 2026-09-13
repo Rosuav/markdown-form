@@ -19,14 +19,12 @@ module Jekyll
       @name = ""
       @type = "text"
       @label = text.sub(/ *\(([A-Za-z0-9]*)(\??)\)$/) {|m|
-        puts "Captured!", m, $1, $2
         @name = $1
         @type = "checkbox" if $2 == "?"
         "" # Remove the parenthesized annotation
       }
       if @name == ""
         @label.sub!(/\*([A-Za-z0-9]+)\*/) {|m|
-          puts "Emphasis name", m, $1
           @name = $1.downcase
           $1 # Remove the emphasis markers but keep the word (not downcased)
         }
@@ -53,7 +51,6 @@ Jekyll::Hooks.register [:pages, :documents], :pre_render do |doc, payload|
   # The translation is applied ONLY if the page frontmatter includes "form: ..."
   # to provide additional information about the destination.
   if form = payload.page['form']
-    # puts "Syntax check #{payload.page['name']} #{form}"
     doc.content.gsub!(/\[\[(.*?)\]\]/, '{% field \1 %}')
   end
 end

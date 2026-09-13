@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.3.1] - 2026-09-14
+
+- Remove debugging output
+
 ## [0.3.0] - 2026-09-14
 
 - Rework syntax to [[FieldName]] and support nicer notation for customization
