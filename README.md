@@ -10,7 +10,7 @@ destination, and (if applicable) any JavaScript for handling submissions.
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add markdown_form
+bundle add markdown_form -g jekyll_plugins
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
@@ -18,6 +18,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 ```bash
 gem install markdown_form
 ```
+
+(TODO: Will Jekyll correctly recognize it in this situation? Does it need to be told to look for it?)
 
 ## Usage
 
