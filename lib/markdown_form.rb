@@ -30,4 +30,14 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('form', Jekyll::MarkdownFormTag)
+Liquid::Template.register_tag('field', Jekyll::MarkdownFormTag)
+
+Jekyll::Hooks.register [:pages, :documents], :pre_render do |doc, payload|
+  # Translate [[blah]] syntax into {% field blah %}
+  # The translation is applied ONLY if the page frontmatter includes "form: ..."
+  # to provide additional information about the destination.
+  if form = payload.page['form']
+    # puts "Syntax check #{payload.page['name']} #{form}"
+    doc.content.gsub!(/\[\[(.*?)\]\]/, '{% field \1 %}')
+  end
+end
