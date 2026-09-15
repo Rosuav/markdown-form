@@ -39,8 +39,8 @@ module Jekyll
       # initialize method, but I don't know how to access site configs from there.
       if @name == context.registers[:site].config["form_scribble"] then @type = "scribble" end
       case @type
-      when "checkbox" then "<label><input type=checkbox name=#{@name}> <span>#{@label}</span>"
-      when "scribble" then "<label>#{@label}<br><canvas></canvas><input type=hidden name=#{@name}>"
+      when "checkbox" then "<label><input type=checkbox name=#{@name}> <span>#{@label}</span></label>"
+      when "scribble" then "<label>#{@label}<br><canvas></canvas><input type=hidden name=#{@name}></label>"
       when "submit" then "<button type=submit>#{@label}</button>"
       else "<label><span>#{@label}</span> <input name=#{@name}></label>"
       end
