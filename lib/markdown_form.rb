@@ -40,7 +40,7 @@ module Jekyll
       if @name == context.registers[:site].config["form_scribble"] then @type = "scribble" end
       case @type
       when "checkbox" then "<label><input type=checkbox name=#{@name}> <span>#{@label}</span></label>"
-      when "scribble" then "<label>#{@label}<br><canvas></canvas><input type=hidden name=#{@name}></label>"
+      when "scribble" then "<label><span>#{@label}</span> <button type=button id=clearcanvas>&#x1f5d1;</button><br><canvas></canvas><input type=hidden name=#{@name}></label>"
       when "submit" then "<button type=submit>#{@label}</button>"
       else "<label><span>#{@label}</span> <input name=#{@name}></label>"
       end
