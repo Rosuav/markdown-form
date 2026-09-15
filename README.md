@@ -38,6 +38,11 @@ field name annotation: `[[I agree to not be an idiot (notidiot?)]]`
 
 A submit button can be created by naming a field "submit": `[[Apply now! (submit)]]`
 
+Scribbler support can be enabled by adding `form_scribble: drawarea` to your `_config.yml`, which will make
+the name `drawarea` (or any other name chosen) magically turn the form field into a scribbler. Note that
+most of the functionality of a scribbler needs to be provided in JavaScript and is outside the scope of this
+plugin.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rosuav/markdown_form.

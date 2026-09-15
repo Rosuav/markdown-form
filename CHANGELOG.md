@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-16
+
+- Add support for a scribbler
+
 ## [0.3.1] - 2026-09-14
 
 - Remove debugging output

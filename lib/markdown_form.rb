@@ -35,8 +35,12 @@ module Jekyll
     end
 
     def render(context)
+      # Some names are magical and will change the rendering. Ideally this should be done in the
+      # initialize method, but I don't know how to access site configs from there.
+      if @name == context.registers[:site].config["form_scribble"] then @type = "scribble" end
       case @type
       when "checkbox" then "<label><input type=checkbox name=#{@name}> <span>#{@label}</span>"
+      when "scribble" then "<label>#{@label}<br><canvas></canvas><input type=hidden name=#{@name}>"
       when "submit" then "<button type=submit>#{@label}</button>"
       else "<label><span>#{@label}</span> <input name=#{@name}></label>"
       end
